@@ -3,7 +3,7 @@
 <p align="center">
   Simple, beautiful, and user-friendly HTML template for <a href="https://github.com/Gozargah/Marzban">Marzban</a> subscription page
   <br>
-  <a href="https://denisromanov.ru/projects/marzbanify-template-demo"><strong>Live demo »</strong></a>
+  <a href="https://denisro.com/projects/marzbanify-template-demo"><strong>Live demo »</strong></a>
   <br>
   <br>
   <a href="https://github.com/dermv/marzbanify-template/tree/main#features">Features</a>
