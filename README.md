@@ -6,13 +6,13 @@
   <a href="https://denisro.com/projects/marzbanify-template-demo"><strong>Live demo »</strong></a>
   <br>
   <br>
-  <a href="https://github.com/dermv/marzbanify-template/tree/main#features">Features</a>
+  <a href="https://github.com/Asbecov/marzbanify-template/tree/main#features">Features</a>
   ·
-  <a href="https://github.com/dermv/marzbanify-template/tree/main#mini-version">mini Version</a>
+  <a href="https://github.com/Asbecov/marzbanify-template/tree/main#mini-version">mini Version</a>
   ·
-  <a href="https://github.com/dermv/marzbanify-template/tree/main#install">Install</a>
+  <a href="https://github.com/Asbecov/marzbanify-template/tree/main#install">Install</a>
   ·
-  <a href="https://github.com/dermv/marzbanify-template/tree/main#personalization">Personalization</a>
+  <a href="https://github.com/Asbecov/marzbanify-template/tree/main#personalization">Personalization</a>
 </p>
 
 <p>
