@@ -58,12 +58,12 @@ Choose the version and run the corresponding command.
 
 **Main version:**
 ```
-sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/dermv/marzbanify-template/main/index.html
+sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/Asbecov/marzbanify-template/main/index.html
 ```
 
 **Mini version:**
 ```
-sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/dermv/marzbanify-template/main/mini/index.html
+sudo wget -O /var/lib/marzban/templates/subscription/index.html https://raw.githubusercontent.com/Asbecov/marzbanify-template/main/mini/index.html
 ```
 
 ### 2. Configure the subscription page path
