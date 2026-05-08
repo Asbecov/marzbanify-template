@@ -879,7 +879,13 @@
         throw new Error(`Crypto API error: ${response.status}`);
       }
 
-      const encryptedUrl = (await response.text()).trim();
+      let encryptedUrl = '';
+      try {
+        const data = await response.json();
+        encryptedUrl = (data.encrypted_link || '').trim();
+      } catch {
+        encryptedUrl = (await response.text()).trim();
+      }
       if (!encryptedUrl) {
         throw new Error('Crypto API returned empty response');
       }

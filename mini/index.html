@@ -691,14 +691,20 @@
     async function fetchEncryptedHappLink(url) {
       const response = await fetch(HAPP_CRYPTO_API, {
         method: 'POST',
-        body: '{"url" : ${SUB_URL}}',
+        body: JSON.stringify({ url }),
       });
 
       if (!response.ok) {
         throw new Error(`Crypto API error: ${response.status}`);
       }
 
-      const encryptedUrl = (await response.text()).trim();
+      let encryptedUrl = '';
+      try {
+        const data = await response.json();
+        encryptedUrl = (data.encrypted_link || '').trim();
+      } catch {
+        encryptedUrl = (await response.text()).trim();
+      }
       if (!encryptedUrl) {
         throw new Error('Crypto API returned empty response');
       }
