@@ -678,6 +678,7 @@
   <script src="https://cdn.jsdelivr.net/npm/alpinejs-i18n@2.x.x/dist/cdn.min.js"></script>
   <script>
     const SUB_URL = window.location.href;
+    const HAPP_CRYPTO_API = 'https://crypto.happ.su/api-v2.php';
 
     // URL schemes for quick subscription import.
     const SUB_URL_SCHEMES = {
@@ -686,6 +687,34 @@
       android: `v2raytun://import/${SUB_URL}`,
       ios: `happ://import/${SUB_URL}`,
     };
+
+    async function fetchEncryptedHappLink(url) {
+      const response = await fetch(HAPP_CRYPTO_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Crypto API error: ${response.status}`);
+      }
+
+      const encryptedUrl = (await response.text()).trim();
+      if (!encryptedUrl) {
+        throw new Error('Crypto API returned empty response');
+      }
+
+      return encryptedUrl;
+    }
+
+    function setSubscriptionLink(os, url) {
+      const element = document.getElementById(`sub-url-${os}`);
+      if (element) {
+        element.href = url;
+      }
+    }
     // Default locale used to display content if
     // the user's locale is not specified.
     const DEFAULT_LOCALE = 'ru';
@@ -712,7 +741,7 @@
             },
             third: {
               title: 'Connect and enjoy',
-              text: 'In the main section, press the large power button in the center to connect to the VPN. If needed, select another server. Enjoy :)',
+              text: 'In the main section, select tunnel mode, press the large power button in the center to connect to the VPN. If needed, select another server. Enjoy :)',
             },
           },
           ios: {
@@ -848,7 +877,7 @@
             },
             third: {
               title: '连接并享受',
-              text: `在主界面点击中央的大型电源按钮连接 VPN。如有需要，请选择其他服务器。尽情享受 :)`,
+              text: `在主界面选择隧道模式，点击中央的大型电源按钮连接 VPN。如有需要，请选择其他服务器。尽情享受 :)`,
             },
           },
           ios: {
@@ -916,7 +945,7 @@
             },
             third: {
               title: 'اتصال و لذت بردن',
-              text: 'در بخش اصلی، روی دکمه بزرگ روشن/خاموش در مرکز کلیک کنید تا به VPN متصل شوید. در صورت نیاز، سرور دیگری را انتخاب کنید. لذت ببرید :)',
+              text: 'در بخش اصلی، حالت تونل را انتخاب کنید، روی دکمه بزرگ روشن/خاموش در مرکز کلیک کنید تا به VPN متصل شوید. در صورت نیاز، سرور دیگری را انتخاب کنید. لذت ببرید :)',
             },
           },
           ios: {
@@ -1079,8 +1108,18 @@
       );
 
       for (const [os, url] of Object.entries(SUB_URL_SCHEMES)) {
-        document.getElementById(`sub-url-${os}`).href = url;
+        setSubscriptionLink(os, url);
       }
+
+      fetchEncryptedHappLink(SUB_URL)
+        .then((encryptedUrl) => {
+          setSubscriptionLink('ios', encryptedUrl);
+          setSubscriptionLink('linux', encryptedUrl);
+        })
+        .catch(() => {
+          setSubscriptionLink('ios', SUB_URL_SCHEMES.ios);
+          setSubscriptionLink('linux', SUB_URL_SCHEMES.linux);
+        });
     });
   </script>
 </body>
