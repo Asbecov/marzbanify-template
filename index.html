@@ -872,12 +872,7 @@
     async function fetchEncryptedHappLink(url) {
       const response = await fetch(HAPP_CRYPTO_API, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "url": url,
-        }),
+        body: new URLSearchParams({ url }),
       });
 
       if (!response.ok) {
