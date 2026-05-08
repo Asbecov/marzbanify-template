@@ -875,7 +875,9 @@
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({
+          "url": url,
+        }),
       });
 
       if (!response.ok) {
@@ -938,7 +940,7 @@
             },
             third: {
               title: 'Connect and enjoy',
-              text: 'In the main section, select tunnel mode, press the large power button in the center to connect to the VPN. If needed, select another server. Enjoy :)',
+              text: 'In the main section, press the large power button in the center to connect to the VPN. If needed, select another server. Enjoy :)',
             },
           },
           ios: {
@@ -966,7 +968,7 @@
             },
             third: {
               title: 'Connect and enjoy',
-              text: 'In the main section, press the large power button in the center to connect to the VPN. If needed, select another server. Enjoy :)',
+              text: 'In the main section, <b>select tunnel mode</b>, press the large power button in the center to connect to the VPN. If needed, select another server. Enjoy :)',
             },
           },
           linux: {
@@ -1050,7 +1052,7 @@
             },
             third: {
               title: 'Подключись и пользуйся',
-              text: 'В главном разделе выбери режим туннеля, нажми большую кнопку включения в центре для подключения к VPN. При необходимости выбери другой сервер. Пользуйся :)',
+              text: 'В главном разделе выбери <b>режим туннеля</b>, нажми большую кнопку включения в центре для подключения к VPN. При необходимости выбери другой сервер. Пользуйся :)',
             },
           },
           linux: {
