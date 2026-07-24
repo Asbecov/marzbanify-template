@@ -745,8 +745,8 @@
               <span class="my-step-counter mb-1"></span>
               <h5 class="my-text-heading fw-semibold" x-text="$t('guideContent.ios.first.title')"></h5>
               <p class="my-text-content" x-html="$t('guideContent.ios.first.text')"></p>
-              <a class="btn my-btn-secondary" href="https://apps.apple.com/ru/app/happ-proxy-utility/id6504287215"
-                role="button" rel="noopener noreferrer" target="_blank">
+              <a class="btn my-btn-secondary" href="https://apps.apple.com/ru/app/incy/id6756943388" role="button"
+                rel="noopener noreferrer" target="_blank">
                 <span x-text="$t('openInApp', {app: 'App Store'})"></span>
               </a>
             </div>
@@ -859,39 +859,14 @@
   <script src="https://unpkg.com/qr-code-styling@1.9.1/lib/qr-code-styling.js"></script>
   <script>
     const SUB_URL = window.location.href;
-    const HAPP_CRYPTO_API = 'https://crypto.happ.su/api-v2.php';
 
     // URL schemes for quick subscription import.
     const SUB_URL_SCHEMES = {
       pc: `v2raytun://import/${SUB_URL}`,
       linux: `happ://add/${SUB_URL}`,
       android: `v2raytun://import/${SUB_URL}`,
-      ios: `happ://add/${SUB_URL}`,
+      ios: `incy://add/${SUB_URL}`,
     };
-
-    async function fetchEncryptedHappLink(url) {
-      const response = await fetch(HAPP_CRYPTO_API, {
-        method: 'POST',
-        body: JSON.stringify({ url }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Crypto API error: ${response.status}`);
-      }
-
-      let encryptedUrl = '';
-      try {
-        const data = await response.json();
-        encryptedUrl = (data.encrypted_link || '').trim();
-      } catch {
-        encryptedUrl = (await response.text()).trim();
-      }
-      if (!encryptedUrl) {
-        throw new Error('Crypto API returned empty response');
-      }
-
-      return encryptedUrl;
-    }
 
     function setSubscriptionLink(os, url) {
       const element = document.getElementById(`sub-url-${os}`);
@@ -946,7 +921,7 @@
           },
           ios: {
             first: {
-              title: 'Install and open Happ',
+              title: 'Install and open Incy',
               text: 'Open the page in App Store and install the app. Launch it.',
             },
             second: {
@@ -1030,7 +1005,7 @@
           },
           ios: {
             first: {
-              title: 'Установи и открой Happ',
+              title: 'Установи и открой Incy',
               text: 'Открой страницу в App Store и установи приложение, после чего запусти его.',
             },
             second: {
@@ -1114,7 +1089,7 @@
           },
           ios: {
             first: {
-              title: '安装并打开 Happ',
+              title: '安装并打开 Incy',
               text: `在 App Store 页面打开并安装应用程序，然后启动它。`,
             },
             second: {
@@ -1198,7 +1173,7 @@
           },
           ios: {
             first: {
-              title: 'نصب و باز کردن Happ',
+              title: 'نصب و باز کردن Incy',
               text: 'صفحه را در اپ استور باز کرده و برنامه را نصب کنید، سپس آن را اجرا کنید.',
             },
             second: {
@@ -1447,16 +1422,6 @@
       for (const [os, url] of Object.entries(SUB_URL_SCHEMES)) {
         setSubscriptionLink(os, url);
       }
-
-      fetchEncryptedHappLink(SUB_URL)
-        .then((encryptedUrl) => {
-          setSubscriptionLink('ios', encryptedUrl);
-          setSubscriptionLink('linux', encryptedUrl);
-        })
-        .catch(() => {
-          setSubscriptionLink('ios', SUB_URL_SCHEMES.ios);
-          setSubscriptionLink('linux', SUB_URL_SCHEMES.linux);
-        });
     });
   </script>
 </body>
